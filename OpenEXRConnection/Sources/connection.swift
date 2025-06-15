@@ -1,15 +1,6 @@
 @preconcurrency import Metal
 import OpenEXRWrapper
 
-private class DummyClassInFramework {}
-
-public enum OpenEXRConnectionError: Error {
-    case failedToReadFile
-    case failedToCreateTexture
-    case invalidMetalDevice
-    case failedToCreateCubeTexture
-}
-
 func fetchExrData(url: URL) throws -> ReadExrOut {
     var cchar: [CChar] = Array(url.path.utf8CString)
     var out = ReadExrOut()

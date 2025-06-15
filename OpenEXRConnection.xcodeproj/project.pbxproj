@@ -94,7 +94,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			publicHeaders = (
 				OpenEXRWrapper.h,
-				wrapper.h,
+				Sources/wrapper.h,
 			);
 			target = 4F0AEF102DFEAB0900D3522D /* OpenEXRWrapper */;
 		};
