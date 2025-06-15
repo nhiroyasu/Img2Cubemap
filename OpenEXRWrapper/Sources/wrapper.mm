@@ -10,33 +10,6 @@
 using namespace Imf;
 using namespace Imath;
 
-void generateExrFile() {
-    int width = 10;
-    int height = 10;
-
-    // ピクセルデータを生成（縦x横）
-    Array2D<Rgba> pixels;
-    pixels.resizeErase(height, width);
-
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            float r = 0.0f;
-            float g = static_cast<float>(x) / (width - 1.0f);
-            float b = static_cast<float>(y) / (height - 1.0f);
-            pixels[y][x] = Rgba(r, g, b);
-        }
-    }
-
-    try {
-        RgbaOutputFile file("hello.exr", width, height, WRITE_RGBA);
-        file.setFrameBuffer(&pixels[0][0], 1, width);
-        file.writePixels(height);
-        NSLog(@"EXR file written successfully.");
-    } catch (const std::exception& e) {
-        NSLog(@"Error writing EXR: %s", e.what());
-    }
-}
-
 int readExrFile(char *path, ReadExrOut *output) {
     try {
         RgbaInputFile file(path);

@@ -12,7 +12,7 @@ func fetchExrData(url: URL) throws -> ReadExrOut {
     }
 }
 
-public func generateMetalTexture(device: MTLDevice, from exr: ReadExrOut) throws -> MTLTexture {
+func generateMetalTexture(device: MTLDevice, from exr: ReadExrOut) throws -> MTLTexture {
     let descriptor = MTLTextureDescriptor.texture2DDescriptor(
         pixelFormat: .rgba16Float,
         width: Int(exr.width),
@@ -38,7 +38,7 @@ public func generateMetalTexture(device: MTLDevice, from exr: ReadExrOut) throws
     return texture
 }
 
-public func generateCubeTexture(device: MTLDevice, from exr: ReadExrOut, size: Int) throws -> MTLTexture {
+func generateCubeTexture(device: MTLDevice, from exr: ReadExrOut, size: Int) throws -> MTLTexture {
     guard let library = try? device.makeDefaultLibrary(bundle: Bundle(for: DummyClassInFramework.self)),
           let commandQueue = device.makeCommandQueue(),
           let commandBuffer = commandQueue.makeCommandBuffer() else {
