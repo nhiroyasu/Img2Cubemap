@@ -1,0 +1,50 @@
+# OpenEXRConnection
+
+A Swift package for loading 360-degree images (in equirectangular format) from EXR files.
+
+## Features
+
+- Converts equirectangular EXR files into cubemap `MTLTexture`s.
+
+## Install
+
+### Framework
+
+Coming soon...
+
+## Usage
+
+```swift
+import OpenEXRConnection
+
+func load(url: URL) async throws {
+    let device = MTLCreateSystemDefaultDevice()!
+    let texture = try await generateCubeTexture(device: device, from: url)
+
+    // You can now use the cubemap texture
+    // ...
+}
+```
+
+## Preview
+
+| Equirectangular EXR | Cubemap Texture | Preview |
+| --- | --- | --- |
+| <img src="./README_ASSETS/equirectangular.jpg" width="300"> | <img src="./README_ASSETS/cubemap.png" width="300"> | <img src="./README_ASSETS/preview.png" width="300"> |
+
+## Sample Project
+
+Use the `OpenEXRConnectionSample` project to see how to use OpenEXRConnection.
+
+### Prepare
+
+1. Clone the repository
+2. Install CMake
+3. Run `make` to build the static library of OpenEXR
+4. Open `OpenEXRConnection.xcodeproj`
+5. Select the `OpenEXRConnectionSample` scheme and build it
+
+## Build
+
+To build locally, follow the same steps listed in the Sample Project's "Prepare" section.
+
