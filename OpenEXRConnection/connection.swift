@@ -3,19 +3,25 @@ import OpenEXRWrapper
 
 private class DummyClassInFramework {}
 
-func fetchExrData(url: URL) -> ReadExrOut? {
+public enum OpenEXRConnectionError: Error {
+    case failedToReadFile
+    case failedToCreateTexture
+    case invalidMetalDevice
+    case failedToCreateCubeTexture
+}
+
+func fetchExrData(url: URL) throws -> ReadExrOut {
     var cchar: [CChar] = Array(url.path.utf8CString)
     var out = ReadExrOut()
 
     if readExrFile(&cchar, &out) == SUCCESS {
         return out
     } else {
-        print("Failed to read EXR file.")
-        return nil
+        throw OpenEXRConnectionError.failedToReadFile
     }
 }
 
-public func generateMetalTexture(device: MTLDevice, from exr: ReadExrOut) -> MTLTexture? {
+public func generateMetalTexture(device: MTLDevice, from exr: ReadExrOut) throws -> MTLTexture {
     let descriptor = MTLTextureDescriptor.texture2DDescriptor(
         pixelFormat: .rgba16Float,
         width: Int(exr.width),
@@ -24,12 +30,14 @@ public func generateMetalTexture(device: MTLDevice, from exr: ReadExrOut) -> MTL
     )
     descriptor.usage = [.shaderRead, .shaderWrite]
 
-    let texture = device.makeTexture(descriptor: descriptor)
+    guard let texture = device.makeTexture(descriptor: descriptor) else {
+        throw OpenEXRConnectionError.failedToCreateTexture
+    }
 
     var color = Array(UnsafeBufferPointer(start: exr.color, count: Int(exr.width * exr.height)))
 
     let region = MTLRegionMake2D(0, 0, Int(exr.width), Int(exr.height))
-    texture?.replace(
+    texture.replace(
         region: region,
         mipmapLevel: 0,
         withBytes: &color,
@@ -39,15 +47,15 @@ public func generateMetalTexture(device: MTLDevice, from exr: ReadExrOut) -> MTL
     return texture
 }
 
-public func generateCubeTexture(device: MTLDevice, from exr: ReadExrOut, size: Int) -> MTLTexture? {
+public func generateCubeTexture(device: MTLDevice, from exr: ReadExrOut, size: Int) throws -> MTLTexture {
     guard let library = try? device.makeDefaultLibrary(bundle: Bundle(for: DummyClassInFramework.self)),
           let commandQueue = device.makeCommandQueue(),
-          let commandBuffer = commandQueue.makeCommandBuffer() else { return nil }
+          let commandBuffer = commandQueue.makeCommandBuffer() else {
+        throw OpenEXRConnectionError.invalidMetalDevice
+    }
 
     // Create a Metal texture from the EXR data
-    guard let baseTexture = generateMetalTexture(device: device, from: exr) else {
-        return nil
-    }
+    let baseTexture = try generateMetalTexture(device: device, from: exr)
 
     // Create a cube texture descriptor
     let cubeDescriptor = MTLTextureDescriptor.textureCubeDescriptor(
@@ -57,7 +65,7 @@ public func generateCubeTexture(device: MTLDevice, from exr: ReadExrOut, size: I
     )
     cubeDescriptor.usage = [.shaderRead, .shaderWrite]
     guard let cubeTexture = device.makeTexture(descriptor: cubeDescriptor) else {
-        return nil
+        throw OpenEXRConnectionError.failedToCreateCubeTexture
     }
 
     // Create a compute pipeline state
@@ -103,20 +111,15 @@ public func generateCubeTexture(device: MTLDevice, from exr: ReadExrOut, size: I
 public func generateCubeTexture(device: any MTLDevice, from url: URL) async throws -> MTLTexture {
     try await withCheckedThrowingContinuation { continuation in
         DispatchQueue.global().async {
-            guard let exrData = fetchExrData(url: url) else {
-                print("Failed to load EXR data.")
-                continuation.resume(throwing: NSError(domain: "EXRError", code: -1, userInfo: nil))
-                return
-            }
-            defer { free(exrData.color) }
+            do {
+                let exrData = try fetchExrData(url: url)
+                defer { free(exrData.color) }
 
-            guard let texture = generateCubeTexture(device: device, from: exrData, size: Int(exrData.width) / 4) else {
-                print("Failed to create Metal texture.")
-                continuation.resume(throwing: NSError(domain: "TextureError", code: -1, userInfo: nil))
-                return
+                let texture = try generateCubeTexture(device: device, from: exrData, size: Int(exrData.width) / 4)
+                continuation.resume(returning: texture)
+            } catch {
+                continuation.resume(throwing: error)
             }
-            print("Successfully created Metal texture from EXR data.")
-            continuation.resume(returning: texture)
         }
     }
 }
