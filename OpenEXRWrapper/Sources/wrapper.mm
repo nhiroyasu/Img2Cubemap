@@ -4,6 +4,7 @@
 #import "ImfRgbaFile.h"
 #import "ImfArray.h"
 #import "ImfChannelList.h"
+#import "ImfVersion.h"
 #import "ImfHeader.h"
 #import "wrapper.h"
 
@@ -16,6 +17,13 @@ int readExrFile(char *path, ReadExrOut *output) {
         Box2i dw = file.dataWindow();
         int width = dw.max.x - dw.min.x + 1;
         int height = dw.max.y - dw.min.y + 1;
+
+        int version = file.version();
+        os_log(OS_LOG_DEFAULT, "EXR version: %d", version & VERSION_NUMBER_FIELD);
+        os_log(OS_LOG_DEFAULT, "TILED: %s", version & TILED_FLAG ? "true" : "false");
+        os_log(OS_LOG_DEFAULT, "LONG_NAMES: %s", version & LONG_NAMES_FLAG ? "true" : "false");
+        os_log(OS_LOG_DEFAULT, "NON_IMAGE: %s", version & NON_IMAGE_FLAG ? "true" : "false");
+        os_log(OS_LOG_DEFAULT, "MULTI_PART_FILE: %s", version & MULTI_PART_FILE_FLAG ? "true" : "false");
 
         const ChannelList &channels = file.header().channels();
         for (ChannelList::ConstIterator it = channels.begin(); it != channels.end(); ++it) {
@@ -31,7 +39,7 @@ int readExrFile(char *path, ReadExrOut *output) {
 
         simd_half4 *texData = (simd_half4 *)malloc(sizeof(simd_half4) * width * height);
         if (!texData) {
-            os_log(OS_LOG_DEFAULT, "Memory allocation failed.");
+            os_log_error(OS_LOG_DEFAULT, "Memory allocation failed.");
             return FALSE;
         }
 
@@ -52,7 +60,7 @@ int readExrFile(char *path, ReadExrOut *output) {
         output->height = height;
 
     } catch (const std::exception &e) {
-        os_log(OS_LOG_DEFAULT, "Error reading EXR: %s", e.what());
+        os_log_error(OS_LOG_DEFAULT, "Error reading EXR: %s", e.what());
         free(output->texData);
         return FAILURE;
     }
@@ -62,7 +70,7 @@ int readExrFile(char *path, ReadExrOut *output) {
 
 simd_half4 ReadExrOutGetColor(ReadExrOut *output, int x, int y) {
     if (x < 0 || x >= output->width || y < 0 || y >= output->height) {
-        os_log(OS_LOG_DEFAULT, "Coordinates out of bounds: (%d, %d)", x, y);
+        os_log_error(OS_LOG_DEFAULT, "Coordinates out of bounds: (%d, %d)", x, y);
         return {0.0f, 0.0f, 0.0f, 0.0f};
     }
     return output->texData[y * output->width + x];
