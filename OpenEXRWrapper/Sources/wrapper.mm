@@ -29,8 +29,8 @@ int readExrFile(char *path, ReadExrOut *output) {
 
         os_log(OS_LOG_DEFAULT, "EXR file read successfully. Width: %d, Height: %d", width, height);
 
-        simd_half4 *color = (simd_half4 *)malloc(sizeof(simd_half4) * width * height);
-        if (!color) {
+        simd_half4 *texData = (simd_half4 *)malloc(sizeof(simd_half4) * width * height);
+        if (!texData) {
             os_log(OS_LOG_DEFAULT, "Memory allocation failed.");
             return FALSE;
         }
@@ -38,7 +38,7 @@ int readExrFile(char *path, ReadExrOut *output) {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 Rgba &pixel = pixels[y][x];
-                color[y * width + x] = {
+                texData[y * width + x] = {
                     static_cast<_Float16>(pixel.r),
                     static_cast<_Float16>(pixel.g),
                     static_cast<_Float16>(pixel.b),
@@ -47,13 +47,13 @@ int readExrFile(char *path, ReadExrOut *output) {
             }
         }
 
-        output->color = color;
+        output->texData = texData;
         output->width = width;
         output->height = height;
 
     } catch (const std::exception &e) {
         os_log(OS_LOG_DEFAULT, "Error reading EXR: %s", e.what());
-        free(output->color);
+        free(output->texData);
         return FAILURE;
     }
 
@@ -65,5 +65,5 @@ simd_half4 ReadExrOutGetColor(ReadExrOut *output, int x, int y) {
         os_log(OS_LOG_DEFAULT, "Coordinates out of bounds: (%d, %d)", x, y);
         return {0.0f, 0.0f, 0.0f, 0.0f};
     }
-    return output->color[y * output->width + x];
+    return output->texData[y * output->width + x];
 }

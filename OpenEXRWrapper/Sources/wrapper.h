@@ -13,7 +13,7 @@ extern "C" {
 struct {
     int width;
     int height;
-    simd_half4 *color;
+    simd_half4 *texData;
 } typedef ReadExrOut;
 
 int readExrFile(char *path, ReadExrOut *output);

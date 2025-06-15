@@ -25,7 +25,7 @@ func generateMetalTexture(device: MTLDevice, from exr: ReadExrOut) throws -> MTL
         throw OpenEXRConnectionError.failedToCreateTexture
     }
 
-    var color = Array(UnsafeBufferPointer(start: exr.color, count: Int(exr.width * exr.height)))
+    var color = Array(UnsafeBufferPointer(start: exr.texData, count: Int(exr.width * exr.height)))
 
     let region = MTLRegionMake2D(0, 0, Int(exr.width), Int(exr.height))
     texture.replace(
@@ -104,7 +104,7 @@ public func generateCubeTexture(device: any MTLDevice, from url: URL) async thro
         DispatchQueue.global().async {
             do {
                 let exrData = try fetchExrData(url: url)
-                defer { free(exrData.color) }
+                defer { free(exrData.texData) }
 
                 let texture = try generateCubeTexture(device: device, from: exrData, size: Int(exrData.width) / 4)
                 continuation.resume(returning: texture)
