@@ -1,10 +1,3 @@
-//
-//  shader.metal
-//  OpenEXRConnection
-//
-//  Created by NH on 2025/05/18.
-//
-
 #include <metal_stdlib>
 using namespace metal;
 

@@ -106,7 +106,8 @@ public func generateCubeTexture(device: any MTLDevice, from url: URL) async thro
                 let exrData = try fetchExrData(url: url)
                 defer { free(exrData.texData) }
 
-                let texture = try generateCubeTexture(device: device, from: exrData, size: Int(exrData.width) / 4)
+                let size = Int(exrData.width) / 4 // Equirectangular to cube map conversion typically uses 1/4 of the width for each face
+                let texture = try generateCubeTexture(device: device, from: exrData, size: size)
                 continuation.resume(returning: texture)
             } catch {
                 continuation.resume(throwing: error)
