@@ -1,6 +1,8 @@
 @preconcurrency import Metal
 import OpenEXRWrapper
 
+private class DummyClassInFramework {}
+
 func fetchExrData(url: URL) -> ReadExrOut? {
     var cchar: [CChar] = Array(url.path.utf8CString)
     var out = ReadExrOut()
@@ -38,7 +40,7 @@ public func generateMetalTexture(device: MTLDevice, from exr: ReadExrOut) -> MTL
 }
 
 public func generateCubeTexture(device: MTLDevice, from exr: ReadExrOut, size: Int) -> MTLTexture? {
-    guard let library = device.makeDefaultLibrary(),
+    guard let library = try? device.makeDefaultLibrary(bundle: Bundle(for: DummyClassInFramework.self)),
           let commandQueue = device.makeCommandQueue(),
           let commandBuffer = commandQueue.makeCommandBuffer() else { return nil }
 
