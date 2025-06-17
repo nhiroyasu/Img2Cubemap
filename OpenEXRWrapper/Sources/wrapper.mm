@@ -40,7 +40,7 @@ int readExrFile(char *path, ReadExrOut *output) {
         simd_half4 *texData = (simd_half4 *)malloc(sizeof(simd_half4) * width * height);
         if (!texData) {
             os_log_error(OS_LOG_DEFAULT, "Memory allocation failed.");
-            return FALSE;
+            return FAILURE;
         }
 
         for (int y = 0; y < height; y++) {

@@ -3,4 +3,5 @@ public enum OpenEXRConnectionError: Error {
     case failedToCreateTexture
     case invalidMetalDevice
     case failedToCreateCubeTexture
+    case failedToCreateComputeFunction
 }

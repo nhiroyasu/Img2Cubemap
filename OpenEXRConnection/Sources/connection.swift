@@ -25,13 +25,11 @@ func generateMetalTexture(device: MTLDevice, from exr: ReadExrOut) throws -> MTL
         throw OpenEXRConnectionError.failedToCreateTexture
     }
 
-    var color = Array(UnsafeBufferPointer(start: exr.texData, count: Int(exr.width * exr.height)))
-
     let region = MTLRegionMake2D(0, 0, Int(exr.width), Int(exr.height))
     texture.replace(
         region: region,
         mipmapLevel: 0,
-        withBytes: &color,
+        withBytes: exr.texData,
         bytesPerRow: Int(exr.width) * MemoryLayout<simd_half4>.size
     )
 
@@ -61,7 +59,10 @@ func generateCubeTexture(device: MTLDevice, from exr: ReadExrOut, size: Int) thr
 
     // Create a compute pipeline state
     let computeCommandEncoder = commandBuffer.makeComputeCommandEncoder()
-    let computePipelineState = try! device.makeComputePipelineState(function: library.makeFunction(name: "generateCubeMap")!)
+    guard let generateCubeMapFunction = library.makeFunction(name: "generateCubeMap") else {
+        throw OpenEXRConnectionError.failedToCreateComputeFunction
+    }
+    let computePipelineState = try device.makeComputePipelineState(function: generateCubeMapFunction)
 
     // Set the compute pipeline state
     for face in 0..<6 {
