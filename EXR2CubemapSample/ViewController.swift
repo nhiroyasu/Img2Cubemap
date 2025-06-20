@@ -2,7 +2,7 @@ import Cocoa
 @preconcurrency import MetalKit
 import Combine
 import simd
-import OpenEXRConnection
+import EXR2Cubemap
 
 class ViewController: NSViewController {
     var device: MTLDevice!

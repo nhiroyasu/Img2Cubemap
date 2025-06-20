@@ -17,10 +17,10 @@
 		4F0AEF2D2DFEACE600D3522D /* libOpenEXRCore-3_3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0AEED92DFEA20800D3522D /* libOpenEXRCore-3_3.a */; };
 		4F0AEF2E2DFEACE600D3522D /* libOpenEXRUtil-3_3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0AEED42DFEA20800D3522D /* libOpenEXRUtil-3_3.a */; };
 		4F0AEF7F2DFEBB1000D3522D /* OpenEXRWrapper.framework in Sources */ = {isa = PBXBuildFile; fileRef = 4F0AEF112DFEAB0900D3522D /* OpenEXRWrapper.framework */; };
-		4F0AEF802DFEBB1600D3522D /* OpenEXRConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0AEF342DFEB5C400D3522D /* OpenEXRConnection.framework */; };
+		4F0AEF802DFEBB1600D3522D /* EXR2Cubemap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0AEF342DFEB5C400D3522D /* EXR2Cubemap.framework */; };
 		4F0AEF812DFEBB2500D3522D /* OpenEXRWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0AEF112DFEAB0900D3522D /* OpenEXRWrapper.framework */; };
 		4F0AEF822DFEBB2C00D3522D /* OpenEXRWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0AEF112DFEAB0900D3522D /* OpenEXRWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4F0AEF832DFEBB3200D3522D /* OpenEXRConnection.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0AEF342DFEB5C400D3522D /* OpenEXRConnection.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4F0AEF832DFEBB3200D3522D /* EXR2Cubemap.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0AEF342DFEB5C400D3522D /* EXR2Cubemap.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +54,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4F0AEF832DFEBB3200D3522D /* OpenEXRConnection.framework in Embed Frameworks */,
+				4F0AEF832DFEBB3200D3522D /* EXR2Cubemap.framework in Embed Frameworks */,
 				4F0AEF1A2DFEAB0900D3522D /* OpenEXRWrapper.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -82,11 +82,11 @@
 		4F0AEED82DFEA20800D3522D /* libdeflate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdeflate.a; path = openexr_output/lib/libdeflate.a; sourceTree = "<group>"; };
 		4F0AEED92DFEA20800D3522D /* libOpenEXRCore-3_3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libOpenEXRCore-3_3.a"; path = "openexr_output/lib/libOpenEXRCore-3_3.a"; sourceTree = "<group>"; };
 		4F0AEF112DFEAB0900D3522D /* OpenEXRWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenEXRWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F0AEF342DFEB5C400D3522D /* OpenEXRConnection.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OpenEXRConnection.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F0AEF342DFEB5C400D3522D /* EXR2Cubemap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EXR2Cubemap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0AEFB52DFEBF5100D3522D /* README.ja.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.ja.md; sourceTree = "<group>"; };
 		4F0AEFBE2DFEC8B100D3522D /* ThirdPartyNotices.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ThirdPartyNotices.txt; sourceTree = "<group>"; };
 		4F0AEFC22DFECC6800D3522D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		4FFF77842DD87F8800FE2462 /* OpenEXRConnectionSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenEXRConnectionSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FFF77842DD87F8800FE2462 /* EXR2CubemapSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EXR2CubemapSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -98,12 +98,12 @@
 			);
 			target = 4F0AEF102DFEAB0900D3522D /* OpenEXRWrapper */;
 		};
-		4F0AEF3E2DFEB5C400D3522D /* Exceptions for "OpenEXRConnection" folder in "OpenEXRConnection" target */ = {
+		4F0AEF3E2DFEB5C400D3522D /* Exceptions for "EXR2Cubemap" folder in "EXR2Cubemap" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			publicHeaders = (
-				OpenEXRConnection.h,
+				EXR2Cubemap.h,
 			);
-			target = 4F0AEF332DFEB5C400D3522D /* OpenEXRConnection */;
+			target = 4F0AEF332DFEB5C400D3522D /* EXR2Cubemap */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -116,12 +116,12 @@
 			path = OpenEXRWrapper;
 			sourceTree = "<group>";
 		};
-		4F0AEF352DFEB5C400D3522D /* OpenEXRConnection */ = {
+		4F0AEF352DFEB5C400D3522D /* EXR2Cubemap */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				4F0AEF3E2DFEB5C400D3522D /* Exceptions for "OpenEXRConnection" folder in "OpenEXRConnection" target */,
+				4F0AEF3E2DFEB5C400D3522D /* Exceptions for "EXR2Cubemap" folder in "EXR2Cubemap" target */,
 			);
-			path = OpenEXRConnection;
+			path = EXR2Cubemap;
 			sourceTree = "<group>";
 		};
 		4F0AEFB92DFEC20900D3522D /* README_ASSETS */ = {
@@ -129,9 +129,9 @@
 			path = README_ASSETS;
 			sourceTree = "<group>";
 		};
-		4FFF77862DD87F8800FE2462 /* OpenEXRConnectionSample */ = {
+		4FFF77862DD87F8800FE2462 /* EXR2CubemapSample */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = OpenEXRConnectionSample;
+			path = EXR2CubemapSample;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -164,7 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F0AEF192DFEAB0900D3522D /* OpenEXRWrapper.framework in Frameworks */,
-				4F0AEF802DFEBB1600D3522D /* OpenEXRConnection.framework in Frameworks */,
+				4F0AEF802DFEBB1600D3522D /* EXR2Cubemap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,8 +178,8 @@
 				4F0AEFB52DFEBF5100D3522D /* README.ja.md */,
 				4F0AEFBE2DFEC8B100D3522D /* ThirdPartyNotices.txt */,
 				4F0AEFB92DFEC20900D3522D /* README_ASSETS */,
-				4FFF77862DD87F8800FE2462 /* OpenEXRConnectionSample */,
-				4F0AEF352DFEB5C400D3522D /* OpenEXRConnection */,
+				4FFF77862DD87F8800FE2462 /* EXR2CubemapSample */,
+				4F0AEF352DFEB5C400D3522D /* EXR2Cubemap */,
 				4F0AEF122DFEAB0900D3522D /* OpenEXRWrapper */,
 				4FFF77962DD87FBA00FE2462 /* Frameworks */,
 				4FFF77852DD87F8800FE2462 /* Products */,
@@ -189,9 +189,9 @@
 		4FFF77852DD87F8800FE2462 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4FFF77842DD87F8800FE2462 /* OpenEXRConnectionSample.app */,
+				4FFF77842DD87F8800FE2462 /* EXR2CubemapSample.app */,
 				4F0AEF112DFEAB0900D3522D /* OpenEXRWrapper.framework */,
-				4F0AEF342DFEB5C400D3522D /* OpenEXRConnection.framework */,
+				4F0AEF342DFEB5C400D3522D /* EXR2Cubemap.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -253,9 +253,9 @@
 			productReference = 4F0AEF112DFEAB0900D3522D /* OpenEXRWrapper.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		4F0AEF332DFEB5C400D3522D /* OpenEXRConnection */ = {
+		4F0AEF332DFEB5C400D3522D /* EXR2Cubemap */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4F0AEF3F2DFEB5C400D3522D /* Build configuration list for PBXNativeTarget "OpenEXRConnection" */;
+			buildConfigurationList = 4F0AEF3F2DFEB5C400D3522D /* Build configuration list for PBXNativeTarget "EXR2Cubemap" */;
 			buildPhases = (
 				4F0AEF2F2DFEB5C400D3522D /* Headers */,
 				4F0AEF302DFEB5C400D3522D /* Sources */,
@@ -269,18 +269,18 @@
 				4F0AEF492DFEB5F000D3522D /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				4F0AEF352DFEB5C400D3522D /* OpenEXRConnection */,
+				4F0AEF352DFEB5C400D3522D /* EXR2Cubemap */,
 			);
-			name = OpenEXRConnection;
+			name = EXR2Cubemap;
 			packageProductDependencies = (
 			);
 			productName = OpenEXRCollaboration;
-			productReference = 4F0AEF342DFEB5C400D3522D /* OpenEXRConnection.framework */;
+			productReference = 4F0AEF342DFEB5C400D3522D /* EXR2Cubemap.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		4FFF77832DD87F8800FE2462 /* OpenEXRConnectionSample */ = {
+		4FFF77832DD87F8800FE2462 /* EXR2CubemapSample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4FFF77932DD87F8A00FE2462 /* Build configuration list for PBXNativeTarget "OpenEXRConnectionSample" */;
+			buildConfigurationList = 4FFF77932DD87F8A00FE2462 /* Build configuration list for PBXNativeTarget "EXR2CubemapSample" */;
 			buildPhases = (
 				4FFF77802DD87F8800FE2462 /* Sources */,
 				4FFF77812DD87F8800FE2462 /* Frameworks */,
@@ -294,13 +294,13 @@
 				4F0AEF3B2DFEB5C400D3522D /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				4FFF77862DD87F8800FE2462 /* OpenEXRConnectionSample */,
+				4FFF77862DD87F8800FE2462 /* EXR2CubemapSample */,
 			);
-			name = OpenEXRConnectionSample;
+			name = EXR2CubemapSample;
 			packageProductDependencies = (
 			);
 			productName = OpenEXRConnection;
-			productReference = 4FFF77842DD87F8800FE2462 /* OpenEXRConnectionSample.app */;
+			productReference = 4FFF77842DD87F8800FE2462 /* EXR2CubemapSample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -324,7 +324,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4FFF777F2DD87F8800FE2462 /* Build configuration list for PBXProject "OpenEXRConnection" */;
+			buildConfigurationList = 4FFF777F2DD87F8800FE2462 /* Build configuration list for PBXProject "EXR2Cubemap" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -338,8 +338,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4FFF77832DD87F8800FE2462 /* OpenEXRConnectionSample */,
-				4F0AEF332DFEB5C400D3522D /* OpenEXRConnection */,
+				4FFF77832DD87F8800FE2462 /* EXR2CubemapSample */,
+				4F0AEF332DFEB5C400D3522D /* EXR2Cubemap */,
 				4F0AEF102DFEAB0900D3522D /* OpenEXRWrapper */,
 			);
 		};
@@ -402,7 +402,7 @@
 		};
 		4F0AEF3B2DFEB5C400D3522D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4F0AEF332DFEB5C400D3522D /* OpenEXRConnection */;
+			target = 4F0AEF332DFEB5C400D3522D /* EXR2Cubemap */;
 			targetProxy = 4F0AEF3A2DFEB5C400D3522D /* PBXContainerItemProxy */;
 		};
 		4F0AEF492DFEB5F000D3522D /* PBXTargetDependency */ = {
@@ -537,7 +537,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nhiro1109.OpenEXRConnection;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nhiro1109.EXR2Cubemap;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
@@ -579,7 +579,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nhiro1109.OpenEXRConnection;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nhiro1109.EXR2Cubemap;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
@@ -718,7 +718,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = OpenEXRConnectionSample/OpenEXRConnection.entitlements;
+				CODE_SIGN_ENTITLEMENTS = EXR2CubemapSample/EXR2CubemapSample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -737,7 +737,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nhiro1109.OpenEXRConnection;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nhiro1109.EXR2CubemapSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -751,7 +751,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = OpenEXRConnectionSample/OpenEXRConnection.entitlements;
+				CODE_SIGN_ENTITLEMENTS = EXR2CubemapSample/EXR2CubemapSample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -770,7 +770,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nhiro1109.OpenEXRConnection;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nhiro1109.EXR2CubemapSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -791,7 +791,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4F0AEF3F2DFEB5C400D3522D /* Build configuration list for PBXNativeTarget "OpenEXRConnection" */ = {
+		4F0AEF3F2DFEB5C400D3522D /* Build configuration list for PBXNativeTarget "EXR2Cubemap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F0AEF402DFEB5C400D3522D /* Debug */,
@@ -800,7 +800,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4FFF777F2DD87F8800FE2462 /* Build configuration list for PBXProject "OpenEXRConnection" */ = {
+		4FFF777F2DD87F8800FE2462 /* Build configuration list for PBXProject "EXR2Cubemap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4FFF77912DD87F8A00FE2462 /* Debug */,
@@ -809,7 +809,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4FFF77932DD87F8A00FE2462 /* Build configuration list for PBXNativeTarget "OpenEXRConnectionSample" */ = {
+		4FFF77932DD87F8A00FE2462 /* Build configuration list for PBXNativeTarget "EXR2CubemapSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4FFF77942DD87F8A00FE2462 /* Debug */,

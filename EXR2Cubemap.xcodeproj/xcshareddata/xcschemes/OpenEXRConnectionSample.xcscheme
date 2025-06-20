@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4FFF77832DD87F8800FE2462"
-               BuildableName = "OpenEXRConnectionSample.app"
-               BlueprintName = "OpenEXRConnectionSample"
-               ReferencedContainer = "container:OpenEXRConnection.xcodeproj">
+               BuildableName = "EXR2CubemapSample.app"
+               BlueprintName = "EXR2CubemapSample"
+               ReferencedContainer = "container:EXR2Cubemap.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4FFF77832DD87F8800FE2462"
-            BuildableName = "OpenEXRConnectionSample.app"
-            BlueprintName = "OpenEXRConnectionSample"
-            ReferencedContainer = "container:OpenEXRConnection.xcodeproj">
+            BuildableName = "EXR2CubemapSample.app"
+            BlueprintName = "EXR2CubemapSample"
+            ReferencedContainer = "container:EXR2Cubemap.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4FFF77832DD87F8800FE2462"
-            BuildableName = "OpenEXRConnectionSample.app"
-            BlueprintName = "OpenEXRConnectionSample"
-            ReferencedContainer = "container:OpenEXRConnection.xcodeproj">
+            BuildableName = "EXR2CubemapSample.app"
+            BlueprintName = "EXR2CubemapSample"
+            ReferencedContainer = "container:EXR2Cubemap.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
