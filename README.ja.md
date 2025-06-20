@@ -1,4 +1,4 @@
-# OpenEXRConnection
+# EXR2Cubemap
 EXRファイルから360度画像(Equirectangular形式の画像)を読み込むためのSwiftパッケージです。
 
 ## Features

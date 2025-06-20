@@ -1,4 +1,4 @@
-# OpenEXRConnection
+# EXR2Cubemap
 
 A Swift package for loading 360-degree images (in equirectangular format) from EXR files.
 
