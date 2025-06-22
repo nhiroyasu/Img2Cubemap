@@ -1,50 +1,56 @@
 @preconcurrency import Metal
+import simd
 import OpenEXRWrapper
 
-func fetchExrData(url: URL) throws -> ReadExrOut {
-    var cchar: [CChar] = Array(url.path.utf8CString)
-    var out = ReadExrOut()
-
-    if readExrFile(&cchar, &out) == SUCCESS {
-        return out
-    } else {
-        throw OpenEXRConnectionError.failedToReadFile
-    }
-}
-
-func generateMetalTexture(device: MTLDevice, from exr: ReadExrOut) throws -> MTLTexture {
+func generateMetalTexture(
+    device: MTLDevice,
+    width: Int,
+    height: Int,
+    data: UnsafeRawPointer
+) throws -> MTLTexture {
     let descriptor = MTLTextureDescriptor.texture2DDescriptor(
         pixelFormat: .rgba16Float,
-        width: Int(exr.width),
-        height: Int(exr.height),
+        width: Int(width),
+        height: Int(height),
         mipmapped: false
     )
     descriptor.usage = [.shaderRead, .shaderWrite]
 
     guard let texture = device.makeTexture(descriptor: descriptor) else {
-        throw OpenEXRConnectionError.failedToCreateTexture
+        throw Img2CubemapError.failedToCreateTexture
     }
 
-    let region = MTLRegionMake2D(0, 0, Int(exr.width), Int(exr.height))
+    let region = MTLRegionMake2D(0, 0, Int(width), Int(height))
     texture.replace(
         region: region,
         mipmapLevel: 0,
-        withBytes: exr.texData,
-        bytesPerRow: Int(exr.width) * MemoryLayout<simd_half4>.size
+        withBytes: data,
+        bytesPerRow: Int(width) * MemoryLayout<simd_half4>.size
     )
 
     return texture
 }
 
-func generateCubeTexture(device: MTLDevice, from exr: ReadExrOut, size: Int) throws -> MTLTexture {
-    guard let library = try? device.makeDefaultLibrary(bundle: Bundle(for: DummyClassInFramework.self)),
+func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) throws -> MTLTexture {
+    guard let library = try? device.makeDefaultLibrary(bundle: Bundle.module),
           let commandQueue = device.makeCommandQueue(),
           let commandBuffer = commandQueue.makeCommandBuffer() else {
-        throw OpenEXRConnectionError.invalidMetalDevice
+        throw Img2CubemapError.invalidMetalDevice
     }
 
     // Create a Metal texture from the EXR data
-    let baseTexture = try generateMetalTexture(device: device, from: exr)
+    let baseTexture = try generateMetalTexture(
+        device: device,
+        width: Int(exr.header.width),
+        height: Int(exr.header.height),
+        data: try exr.pixels.withUnsafeBytes {
+            if let addr = $0.baseAddress {
+                return addr
+            } else {
+                throw Img2CubemapError.failedToCreateTexture
+            }
+        }
+    )
 
     // Create a cube texture descriptor
     let cubeDescriptor = MTLTextureDescriptor.textureCubeDescriptor(
@@ -54,14 +60,14 @@ func generateCubeTexture(device: MTLDevice, from exr: ReadExrOut, size: Int) thr
     )
     cubeDescriptor.usage = [.shaderRead, .shaderWrite]
     guard let cubeTexture = device.makeTexture(descriptor: cubeDescriptor) else {
-        throw OpenEXRConnectionError.failedToCreateCubeTexture
+        throw Img2CubemapError.failedToCreateCubeTexture
     }
 
     // Create a compute pipeline state
-    let computeCommandEncoder = commandBuffer.makeComputeCommandEncoder()
     guard let generateCubeMapFunction = library.makeFunction(name: "generateCubeMap") else {
-        throw OpenEXRConnectionError.failedToCreateComputeFunction
+        throw Img2CubemapError.failedToCreateComputeFunction
     }
+    let computeCommandEncoder = commandBuffer.makeComputeCommandEncoder()
     let computePipelineState = try device.makeComputePipelineState(function: generateCubeMapFunction)
 
     // Set the compute pipeline state
@@ -100,15 +106,14 @@ func generateCubeTexture(device: MTLDevice, from exr: ReadExrOut, size: Int) thr
     return cubeTexture
 }
 
-public func generateCubeTexture(device: any MTLDevice, from url: URL) async throws -> MTLTexture {
+public func generateCubeTexture(device: any MTLDevice, exr url: URL) async throws -> MTLTexture {
     try await withCheckedThrowingContinuation { continuation in
         DispatchQueue.global().async {
             do {
-                let exrData = try fetchExrData(url: url)
-                defer { free(exrData.texData) }
+                let exr = try readEXR(url: url)
 
-                let size = Int(exrData.width) / 4 // Equirectangular to cube map conversion typically uses 1/4 of the width for each face
-                let texture = try generateCubeTexture(device: device, from: exrData, size: size)
+                let size = Int(exr.header.width) / 4 // Equirectangular to cube map conversion typically uses 1/4 of the width for each face
+                let texture = try generateCubeTexture(device: device, from: exr, size: size)
                 continuation.resume(returning: texture)
             } catch {
                 continuation.resume(throwing: error)
