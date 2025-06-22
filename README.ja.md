@@ -12,9 +12,9 @@ EXRファイルから360度画像(Equirectangular形式の画像)を読み込む
 ```swift
 import EXR2Cubemap
 
-func load(url: URL) async throws {
+func loadEXR(url: URL) async throws {
     let device = MTLCreateSystemDefaultDevice()!
-    let texture = try await generateCubeTexture(device: device, from: url)
+    let texture = try await generateCubeTexture(device: device, exr: url)
 
     // CubemapのTextureを使用できます
     // ...
@@ -28,13 +28,3 @@ func load(url: URL) async throws {
 
 ## Sample Project
 EXR2CubemapSample プロジェクトを使用して、EXR2Cubemapの使用方法を確認できます。
-
-### Prepare
-1. リポジトリをクローンする 
-1. CMakeをインストール
-1. `make` を実行して、OpenEXRの静的ライブラリを作成する
-1. `EXR2Cubemap.xcodeproj` を開く
-1. `EXR2CubemapSample` スキーマを選択してビルドする
-
-## Build
-手元でビルドする場合も、Sample ProjectのPrepareと同様の手順を実行してください。

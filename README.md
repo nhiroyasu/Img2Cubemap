@@ -17,9 +17,9 @@ Coming soon...
 ```swift
 import Img2Cubemap
 
-func load(url: URL) async throws {
+func loadEXR(url: URL) async throws {
     let device = MTLCreateSystemDefaultDevice()!
-    let texture = try await generateCubeTexture(device: device, from: url)
+    let texture = try await generateCubeTexture(device: device, exr: url)
 
     // You can now use the cubemap texture
     // ...
@@ -35,16 +35,3 @@ func load(url: URL) async throws {
 ## Sample Project
 
 Use the `Img2CubemapSample` project to see how to use Img2Cubemap.
-
-### Prepare
-
-1. Clone the repository
-2. Install CMake
-3. Run `make` to build the static library of OpenEXR
-4. Open `Img2Cubemap.xcodeproj`
-5. Select the `Img2CubemapSample` scheme and build it
-
-## Build
-
-To build locally, follow the same steps listed in the Sample Project's "Prepare" section.
-
