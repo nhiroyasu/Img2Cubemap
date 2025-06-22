@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4F2028F82E080E030047CAE8 /* Img2Cubemap in Frameworks */ = {isa = PBXBuildFile; productRef = 4F2028F72E080E030047CAE8 /* Img2Cubemap */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		4F0AEEF42DFEA91400D3522D /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -53,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F2028F82E080E030047CAE8 /* Img2Cubemap in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +122,7 @@
 			);
 			name = Img2CubemapSampleSample;
 			packageProductDependencies = (
+				4F2028F72E080E030047CAE8 /* Img2Cubemap */,
 			);
 			productName = OpenEXRConnection;
 			productReference = 4FFF77842DD87F8800FE2462 /* Img2CubemapSampleSample.app */;
@@ -146,6 +152,9 @@
 			);
 			mainGroup = 4FFF777B2DD87F8800FE2462;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				4F8E5FC62E080C5700DA610C /* XCRemoteSwiftPackageReference "Img2Cubemap" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4FFF77852DD87F8800FE2462 /* Products */;
 			projectDirPath = "";
@@ -383,6 +392,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4F8E5FC62E080C5700DA610C /* XCRemoteSwiftPackageReference "Img2Cubemap" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nhiroyasu/Img2Cubemap.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4F2028F72E080E030047CAE8 /* Img2Cubemap */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F8E5FC62E080C5700DA610C /* XCRemoteSwiftPackageReference "Img2Cubemap" */;
+			productName = Img2Cubemap;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4FFF777C2DD87F8800FE2462 /* Project object */;
 }

@@ -2,7 +2,7 @@ import Cocoa
 @preconcurrency import MetalKit
 import Combine
 import simd
-import EXR2Cubemap
+import Img2Cubemap
 
 class ViewController: NSViewController {
     var device: MTLDevice!
@@ -29,7 +29,7 @@ class ViewController: NSViewController {
         Task { @MainActor [weak self] in
             guard let self else { return }
             do {
-                let texture = try await generateCubeTexture(device: device, from: url)
+                let texture = try await generateCubeTexture(device: device, exr: url)
                 setupUI(initialTexture: texture)
                 cubemapView.cubemap = texture
             } catch {
@@ -111,7 +111,7 @@ class ViewController: NSViewController {
                 Task { @MainActor [weak self] in
                     guard let self else { return }
                     do {
-                        let texture = try await generateCubeTexture(device: device, from: url)
+                        let texture = try await generateCubeTexture(device: device, exr: url)
                         cubemapView.cubemap = texture
                     } catch {
                         print("Failed to generate cube texture: \(error)")

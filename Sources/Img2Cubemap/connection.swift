@@ -9,7 +9,7 @@ func generateMetalTexture(
     data: UnsafeRawPointer
 ) throws -> MTLTexture {
     let descriptor = MTLTextureDescriptor.texture2DDescriptor(
-        pixelFormat: .rgba16Float,
+        pixelFormat: .rgba32Float,
         width: Int(width),
         height: Int(height),
         mipmapped: false
@@ -54,7 +54,7 @@ func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) throws
 
     // Create a cube texture descriptor
     let cubeDescriptor = MTLTextureDescriptor.textureCubeDescriptor(
-        pixelFormat: .rgba16Float,
+        pixelFormat: .rgba32Float,
         size: size,
         mipmapped: true
     )

@@ -13,5 +13,5 @@ import MetalKit
     #expect(texture.height == 300)
     #expect(texture.textureType == .typeCube)
     #expect(texture.mipmapLevelCount == 9)
-    #expect(texture.pixelFormat == .rgba16Float)
+    #expect(texture.pixelFormat == .rgba32Float)
 }
