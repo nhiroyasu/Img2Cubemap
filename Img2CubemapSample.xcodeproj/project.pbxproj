@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F2028F82E080E030047CAE8 /* Img2Cubemap in Frameworks */ = {isa = PBXBuildFile; productRef = 4F2028F72E080E030047CAE8 /* Img2Cubemap */; };
+		4F20291D2E08102F0047CAE8 /* Img2Cubemap in Frameworks */ = {isa = PBXBuildFile; productRef = 4F20291C2E08102F0047CAE8 /* Img2Cubemap */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F2028F82E080E030047CAE8 /* Img2Cubemap in Frameworks */,
+				4F20291D2E08102F0047CAE8 /* Img2Cubemap in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,13 +67,13 @@
 		4FFF777B2DD87F8800FE2462 = {
 			isa = PBXGroup;
 			children = (
+				4F0AEFB92DFEC20900D3522D /* README_ASSETS */,
+				4FFF77862DD87F8800FE2462 /* Img2CubemapSample */,
 				4F0AEFC22DFECC6800D3522D /* README.md */,
 				4F0AEFB52DFEBF5100D3522D /* README.ja.md */,
 				4FECBC312E05965C006048E0 /* AGENTS.md */,
 				4FECBC332E05965C006048E0 /* LICENSE */,
 				4F0AEFBE2DFEC8B100D3522D /* ThirdPartyNotices.txt */,
-				4F0AEFB92DFEC20900D3522D /* README_ASSETS */,
-				4FFF77862DD87F8800FE2462 /* Img2CubemapSample */,
 				4FFF77962DD87FBA00FE2462 /* Frameworks */,
 				4FFF77852DD87F8800FE2462 /* Products */,
 			);
@@ -122,7 +122,7 @@
 			);
 			name = Img2CubemapSampleSample;
 			packageProductDependencies = (
-				4F2028F72E080E030047CAE8 /* Img2Cubemap */,
+				4F20291C2E08102F0047CAE8 /* Img2Cubemap */,
 			);
 			productName = OpenEXRConnection;
 			productReference = 4FFF77842DD87F8800FE2462 /* Img2CubemapSampleSample.app */;
@@ -153,7 +153,7 @@
 			mainGroup = 4FFF777B2DD87F8800FE2462;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				4F8E5FC62E080C5700DA610C /* XCRemoteSwiftPackageReference "Img2Cubemap" */,
+				4F20291B2E08102F0047CAE8 /* XCLocalSwiftPackageReference "../Img2Cubemap" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4FFF77852DD87F8800FE2462 /* Products */;
@@ -393,21 +393,16 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		4F8E5FC62E080C5700DA610C /* XCRemoteSwiftPackageReference "Img2Cubemap" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nhiroyasu/Img2Cubemap.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		4F20291B2E08102F0047CAE8 /* XCLocalSwiftPackageReference "../Img2Cubemap" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Img2Cubemap;
 		};
-/* End XCRemoteSwiftPackageReference section */
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4F2028F72E080E030047CAE8 /* Img2Cubemap */ = {
+		4F20291C2E08102F0047CAE8 /* Img2Cubemap */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4F8E5FC62E080C5700DA610C /* XCRemoteSwiftPackageReference "Img2Cubemap" */;
 			productName = Img2Cubemap;
 		};
 /* End XCSwiftPackageProductDependency section */

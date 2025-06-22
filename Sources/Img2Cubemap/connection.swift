@@ -25,7 +25,7 @@ func generateMetalTexture(
         region: region,
         mipmapLevel: 0,
         withBytes: data,
-        bytesPerRow: Int(width) * MemoryLayout<simd_half4>.size
+        bytesPerRow: Int(width) * MemoryLayout<simd_float4>.size
     )
 
     return texture

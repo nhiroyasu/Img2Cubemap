@@ -54,6 +54,7 @@ class CubeMapView: MTKView {
         }
 
         let depthFormat: MTLPixelFormat = .depth32Float
+        let pixelFormat: MTLPixelFormat = .rgba16Float
         let rasterSampleCount: Int = 4
 
         self.commandQueue = commandQueue
@@ -73,7 +74,7 @@ class CubeMapView: MTKView {
         descriptor.vertexFunction = library.makeFunction(name: cubemapVertexShader)
         descriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(cubeMesh.vertexDescriptor)!
         descriptor.fragmentFunction = library.makeFunction(name: cubemapFragmentShader)
-        descriptor.colorAttachments[0].pixelFormat = cubemap.pixelFormat
+        descriptor.colorAttachments[0].pixelFormat = pixelFormat
         descriptor.depthAttachmentPixelFormat = depthFormat
         descriptor.rasterSampleCount = rasterSampleCount
         self.cubemapPSO = try device.makeRenderPipelineState(descriptor: descriptor)
@@ -115,7 +116,7 @@ class CubeMapView: MTKView {
         skyboxPSODescriptor.vertexFunction = library.makeFunction(name: "skybox_vertex")
         skyboxPSODescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(cubeMesh.vertexDescriptor)!
         skyboxPSODescriptor.fragmentFunction = library.makeFunction(name: "skybox_fragment")
-        skyboxPSODescriptor.colorAttachments[0].pixelFormat = cubemap.pixelFormat
+        skyboxPSODescriptor.colorAttachments[0].pixelFormat = pixelFormat
         skyboxPSODescriptor.depthAttachmentPixelFormat = .depth32Float
         skyboxPSODescriptor.rasterSampleCount = rasterSampleCount
         self.skyboxPSO = try! device.makeRenderPipelineState(descriptor: skyboxPSODescriptor)
@@ -151,7 +152,7 @@ class CubeMapView: MTKView {
 
         super.init(frame: frame, device: device)
 
-        self.colorPixelFormat = cubemap.pixelFormat
+        self.colorPixelFormat = pixelFormat
         self.depthStencilPixelFormat = depthFormat
         self.sampleCount = rasterSampleCount
         self.clearColor = .init(red: 0.1, green: 0.1, blue: 0.1, alpha: 1.0)
