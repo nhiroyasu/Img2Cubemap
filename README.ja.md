@@ -5,8 +5,10 @@ EXRファイルから360度画像(Equirectangular形式の画像)を読み込む
 - Equirectangular形式のEXRファイルからCubemapのMTLTextureを生成できます
 
 ## Install
-### Framework
-準備中...
+### Swift Package Manager
+```
+.package(url: "https://github.com/nhiroyasu/Img2Cubemap.git", from: "0.1.0"),
+```
 
 ## Usage
 ```swift

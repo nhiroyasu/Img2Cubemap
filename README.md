@@ -8,9 +8,11 @@ A Swift package for loading 360-degree images (in equirectangular format) from E
 
 ## Install
 
-### Framework
+### Swift Package Manager
+```
+.package(url: "https://github.com/nhiroyasu/Img2Cubemap.git", from: "0.1.0")
+```
 
-Coming soon...
 
 ## Usage
 
