@@ -156,6 +156,10 @@ class CubeMapView: MTKView {
         self.depthStencilPixelFormat = depthFormat
         self.sampleCount = rasterSampleCount
         self.clearColor = .init(red: 0.1, green: 0.1, blue: 0.1, alpha: 1.0)
+
+        #if os(iOS)
+        setupUIForIOS()
+        #endif
     }
 
     required init(coder: NSCoder) {
@@ -264,6 +268,7 @@ class CubeMapView: MTKView {
 
     // MAKR: - UI Events
 
+    #if os(macOS)
     override func scrollWheel(with event: NSEvent) {
         let multiplier: Float32 = 1
         rotationY = rotationY - multiplier * 2.0 * .pi * Float32(event.scrollingDeltaY) / Float32(self.frame.height)
@@ -278,4 +283,48 @@ class CubeMapView: MTKView {
             distance = threshold
         }
     }
+    #endif
+
+    #if os(iOS)
+    func setupUIForIOS() {
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        self.addGestureRecognizer(panGesture)
+
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+        self.addGestureRecognizer(pinchGesture)
+
+    }
+
+    var prevTranslation: CGPoint = .zero
+    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            prevTranslation = gesture.translation(in: self)
+        case .changed:
+            let deltaY = gesture.translation(in: self).y - prevTranslation.y
+            let deltaX = gesture.translation(in: self).x - prevTranslation.x
+            prevTranslation = gesture.translation(in: self)
+
+            let multiplier: Float32 = 1
+            rotationY = rotationY - multiplier * 2.0 * .pi * Float32(deltaY) / Float32(self.frame.height)
+            upSign = sin(rotationY) >= 0 ? 1 : -1
+            rotationX = rotationX - upSign * multiplier * 2.0 * .pi * Float32(deltaX) / Float32(self.frame.width)
+        case .ended, .cancelled:
+            prevTranslation = .zero
+        default:
+            break
+        }
+    }
+
+    @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+        switch gesture.state {
+        case .began, .changed:
+            distance /= Float(gesture.scale)
+            gesture.scale = 1.0
+        default:
+            break
+        }
+    }
+
+    #endif
 }

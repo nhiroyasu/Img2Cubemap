@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F20291D2E08102F0047CAE8 /* Img2Cubemap in Frameworks */ = {isa = PBXBuildFile; productRef = 4F20291C2E08102F0047CAE8 /* Img2Cubemap */; };
+		4F202CAD2E0FD6DF0047CAE8 /* Img2Cubemap in Frameworks */ = {isa = PBXBuildFile; productRef = 4F202CAC2E0FD6DF0047CAE8 /* Img2Cubemap */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +28,7 @@
 		4F0AEFB52DFEBF5100D3522D /* README.ja.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.ja.md; sourceTree = "<group>"; };
 		4F0AEFBE2DFEC8B100D3522D /* ThirdPartyNotices.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ThirdPartyNotices.txt; sourceTree = "<group>"; };
 		4F0AEFC22DFECC6800D3522D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4F202C8C2E0FD5930047CAE8 /* Img2CubemapSample_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Img2CubemapSample_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FECBC312E05965C006048E0 /* AGENTS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = AGENTS.md; sourceTree = "<group>"; };
 		4FECBC332E05965C006048E0 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4FECBC6D2E064511006048E0 /* libOpenEXRUtil-3_3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libOpenEXRUtil-3_3.a"; path = "openexr_output/universal/lib/libOpenEXRUtil-3_3.a"; sourceTree = "<group>"; };
@@ -39,20 +41,72 @@
 		4FFF77842DD87F8800FE2462 /* Img2CubemapSampleSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Img2CubemapSampleSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4F202CA32E0FD5BF0047CAE8 /* Exceptions for "Img2CubemapSample" folder in "Img2CubemapSampleSample" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"/Localized: iOS/LaunchScreen.storyboard",
+				"/Localized: iOS/Main.storyboard",
+				iOS/AppDelegate.swift,
+				iOS/Assets.xcassets,
+				iOS/Info.plist,
+				iOS/SceneDelegate.swift,
+				iOS/ViewController.swift,
+			);
+			target = 4FFF77832DD87F8800FE2462 /* Img2CubemapSampleSample */;
+		};
+		4F202CA42E0FD5BF0047CAE8 /* Exceptions for "Img2CubemapSample" folder in "Img2CubemapSample_iOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"/Localized: iOS/LaunchScreen.storyboard",
+				"/Localized: iOS/Main.storyboard",
+				iOS/AppDelegate.swift,
+				iOS/Assets.xcassets,
+				iOS/SceneDelegate.swift,
+				iOS/ViewController.swift,
+				Matrix/matrix.swift,
+				Resources/cube.obj,
+				Resources/sample.exr,
+				Shader/cubemap_renderer.metal,
+				Shader/skybox_renderer.metal,
+				Shader/util.metal,
+				View/CubeMapView.swift,
+			);
+			target = 4F202C8B2E0FD5930047CAE8 /* Img2CubemapSample_iOS */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4F0AEFB92DFEC20900D3522D /* README_ASSETS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = README_ASSETS;
 			sourceTree = "<group>";
 		};
+		4F202C8D2E0FD5930047CAE8 /* Img2CubemapSample_iOS */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Img2CubemapSample_iOS;
+			sourceTree = "<group>";
+		};
 		4FFF77862DD87F8800FE2462 /* Img2CubemapSample */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4F202CA32E0FD5BF0047CAE8 /* Exceptions for "Img2CubemapSample" folder in "Img2CubemapSampleSample" target */,
+				4F202CA42E0FD5BF0047CAE8 /* Exceptions for "Img2CubemapSample" folder in "Img2CubemapSample_iOS" target */,
+			);
 			path = Img2CubemapSample;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4F202C892E0FD5930047CAE8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F202CAD2E0FD6DF0047CAE8 /* Img2Cubemap in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4FFF77812DD87F8800FE2462 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -74,6 +128,7 @@
 				4FECBC312E05965C006048E0 /* AGENTS.md */,
 				4FECBC332E05965C006048E0 /* LICENSE */,
 				4F0AEFBE2DFEC8B100D3522D /* ThirdPartyNotices.txt */,
+				4F202C8D2E0FD5930047CAE8 /* Img2CubemapSample_iOS */,
 				4FFF77962DD87FBA00FE2462 /* Frameworks */,
 				4FFF77852DD87F8800FE2462 /* Products */,
 			);
@@ -83,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				4FFF77842DD87F8800FE2462 /* Img2CubemapSampleSample.app */,
+				4F202C8C2E0FD5930047CAE8 /* Img2CubemapSample_iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,6 +160,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4F202C8B2E0FD5930047CAE8 /* Img2CubemapSample_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4F202CA02E0FD5940047CAE8 /* Build configuration list for PBXNativeTarget "Img2CubemapSample_iOS" */;
+			buildPhases = (
+				4F202C882E0FD5930047CAE8 /* Sources */,
+				4F202C892E0FD5930047CAE8 /* Frameworks */,
+				4F202C8A2E0FD5930047CAE8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				4F202C8D2E0FD5930047CAE8 /* Img2CubemapSample_iOS */,
+			);
+			name = Img2CubemapSample_iOS;
+			packageProductDependencies = (
+				4F202CAC2E0FD6DF0047CAE8 /* Img2Cubemap */,
+			);
+			productName = Img2CubemapSample_iOS;
+			productReference = 4F202C8C2E0FD5930047CAE8 /* Img2CubemapSample_iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		4FFF77832DD87F8800FE2462 /* Img2CubemapSampleSample */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4FFF77932DD87F8A00FE2462 /* Build configuration list for PBXNativeTarget "Img2CubemapSampleSample" */;
@@ -138,6 +217,9 @@
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					4F202C8B2E0FD5930047CAE8 = {
+						CreatedOnToolsVersion = 16.2;
+					};
 					4FFF77832DD87F8800FE2462 = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -161,11 +243,19 @@
 			projectRoot = "";
 			targets = (
 				4FFF77832DD87F8800FE2462 /* Img2CubemapSampleSample */,
+				4F202C8B2E0FD5930047CAE8 /* Img2CubemapSample_iOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4F202C8A2E0FD5930047CAE8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4FFF77822DD87F8800FE2462 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -176,6 +266,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4F202C882E0FD5930047CAE8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4FFF77802DD87F8800FE2462 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -186,6 +283,67 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		4F202C9D2E0FD5940047CAE8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2CMV7D36JC;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Img2CubemapSample/iOS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nhiro1109.Img2CubemapSample-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4F202C9E2E0FD5940047CAE8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2CMV7D36JC;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Img2CubemapSample/iOS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nhiro1109.Img2CubemapSample-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		4FFF77912DD87F8A00FE2462 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -309,7 +467,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Img2CubemapSample/Img2CubemapSample.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Img2CubemapSample/macOS/Img2CubemapSample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -342,7 +500,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Img2CubemapSample/Img2CubemapSample.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Img2CubemapSample/macOS/Img2CubemapSample.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -373,6 +531,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4F202CA02E0FD5940047CAE8 /* Build configuration list for PBXNativeTarget "Img2CubemapSample_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4F202C9D2E0FD5940047CAE8 /* Debug */,
+				4F202C9E2E0FD5940047CAE8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4FFF777F2DD87F8800FE2462 /* Build configuration list for PBXProject "Img2CubemapSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -403,6 +570,11 @@
 /* Begin XCSwiftPackageProductDependency section */
 		4F20291C2E08102F0047CAE8 /* Img2Cubemap */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = Img2Cubemap;
+		};
+		4F202CAC2E0FD6DF0047CAE8 /* Img2Cubemap */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F20291B2E08102F0047CAE8 /* XCLocalSwiftPackageReference "../Img2Cubemap" */;
 			productName = Img2Cubemap;
 		};
 /* End XCSwiftPackageProductDependency section */

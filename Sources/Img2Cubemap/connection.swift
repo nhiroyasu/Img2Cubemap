@@ -54,7 +54,7 @@ func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) throws
 
     // Create a cube texture descriptor
     let cubeDescriptor = MTLTextureDescriptor.textureCubeDescriptor(
-        pixelFormat: .rgba32Float,
+        pixelFormat: .rgba16Float,
         size: size,
         mipmapped: true
     )
