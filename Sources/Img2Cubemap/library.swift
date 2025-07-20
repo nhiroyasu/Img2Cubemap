@@ -30,6 +30,7 @@ extension MTLDevice {
 
             let url = Bundle.module.url(forResource: name, withExtension: "metallib")!
             let library = try makeLibrary(URL: url)
+            print("✅ Successfully loaded custom metallib from \(url.path)")
             return library
         }
     }
