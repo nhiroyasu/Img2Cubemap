@@ -1,6 +1,6 @@
 SCRIPT := ./build-metallib.sh
 SRC_DIR := Sources/Img2Cubemap/Shader
-OUT_DIR := Sources/Img2Cubemap/Resources
+OUT_DIR := Sources/Img2Cubemap/Shader/lib
 PLATFORMS := macosx iphoneos iphonesimulator xros
 
 # .metal ファイルのリストを取得
