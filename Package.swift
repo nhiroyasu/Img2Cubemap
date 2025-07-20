@@ -27,7 +27,7 @@ let package = Package(
                 .product(name: "OpenEXRWrapper", package: "OpenEXRWrapper")
             ],
             resources: [
-                .process("Resources/generate_cubemap_texture.metal")
+                .process("Shader/"),
             ]),
         .testTarget(
             name: "Img2CubemapTests",

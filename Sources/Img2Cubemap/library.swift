@@ -1,0 +1,36 @@
+import MetalKit
+
+extension MTLDevice {
+    func makePackageLibrary() throws -> MTLLibrary {
+        do {
+            return try makeDefaultLibrary(bundle: Bundle.module)
+        } catch {
+            print("⚠️ Using custom metallib due to error: \(error)")
+            // Fallback to custom metallib if default library creation fails
+            print("🔄 Attempting to load custom metallib...")
+
+            /*
+             When running the `swift test` command in Swift Package Manager, there was an issue where the library could not be loaded in `Bundle.module`.
+             As a workaround, we built .metallib ourselves and loaded it to avoid the issue.
+             .metallib can be created with the `make` command.
+             */
+            let name: String = {
+                #if os(macOS)
+                return "Img2Cubemap.macosx"
+                #elseif targetEnvironment(simulator)
+                return "Img2Cubemap.iphonesimulator"
+                #elseif os(iOS)
+                return "Img2Cubemap.iphoneos"
+                #elseif os(visionOS)
+                return "Img2Cubemap.xros"
+                #else
+                fatalError("Unsupported platform")
+                #endif
+            }()
+
+            let url = Bundle.module.url(forResource: name, withExtension: "metallib")!
+            let library = try makeLibrary(URL: url)
+            return library
+        }
+    }
+}

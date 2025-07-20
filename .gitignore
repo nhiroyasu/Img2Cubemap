@@ -131,3 +131,6 @@ Package.resolved
 Utilities/InstalledSwiftPMConfiguration/config.json
 .devcontainer
 Fixtures/BinaryLibraries/Static/Package1/Simple.artifactbundle/build
+
+# Custom
+Sources/Img2Cubemap/Shader/lib

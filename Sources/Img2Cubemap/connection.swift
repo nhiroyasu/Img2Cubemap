@@ -32,7 +32,7 @@ func generateMetalTexture(
 }
 
 func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) throws -> MTLTexture {
-    guard let library = try? device.makeDefaultLibrary(bundle: Bundle.module),
+    guard let library = try? device.makePackageLibrary(),
           let commandQueue = device.makeCommandQueue(),
           let commandBuffer = commandQueue.makeCommandBuffer() else {
         throw Img2CubemapError.invalidMetalDevice
