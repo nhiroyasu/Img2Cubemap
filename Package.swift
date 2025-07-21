@@ -16,7 +16,7 @@ let package = Package(
             targets: ["Img2Cubemap"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/nhiroyasu/OpenEXRWrapper.git", from: "0.1.0")
+        .package(url: "https://github.com/nhiroyasu/OpenEXRWrapper.git", from: "0.1.1")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
