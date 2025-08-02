@@ -31,7 +31,7 @@ func generateMetalTexture(
     return texture
 }
 
-func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) throws -> MTLTexture {
+func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) async throws -> MTLTexture {
     guard let library = try? device.makePackageLibrary(),
           let commandQueue = device.makeCommandQueue(),
           let commandBuffer = commandQueue.makeCommandBuffer() else {
@@ -68,7 +68,7 @@ func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) throws
         throw Img2CubemapError.failedToCreateComputeFunction
     }
     let computeCommandEncoder = commandBuffer.makeComputeCommandEncoder()
-    let computePipelineState = try device.makeComputePipelineState(function: generateCubeMapFunction)
+    let computePipelineState = try await device.makeComputePipelineState(function: generateCubeMapFunction)
 
     // Set the compute pipeline state
     for face in 0..<6 {
@@ -100,24 +100,20 @@ func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) throws
     mipmapCommandEncoder.endEncoding()
 
     // Commit the command buffer and wait for completion
-    commandBuffer.commit()
-    commandBuffer.waitUntilCompleted()
+    await withCheckedContinuation { continuation in
+        commandBuffer.addCompletedHandler { _ in
+            continuation.resume()
+        }
+        commandBuffer.commit()
+    }
 
     return cubeTexture
 }
 
 public func generateCubeTexture(device: any MTLDevice, exr url: URL) async throws -> MTLTexture {
-    try await withCheckedThrowingContinuation { continuation in
-        DispatchQueue.global().async {
-            do {
-                let exr = try readEXR(url: url)
+    let exr = try readEXR(url: url)
 
-                let size = Int(exr.header.width) / 4 // Equirectangular to cube map conversion typically uses 1/4 of the width for each face
-                let texture = try generateCubeTexture(device: device, from: exr, size: size)
-                continuation.resume(returning: texture)
-            } catch {
-                continuation.resume(throwing: error)
-            }
-        }
-    }
+    let size = Int(exr.header.width) / 4 // Equirectangular to cube map conversion typically uses 1/4 of the width for each face
+    let texture = try await generateCubeTexture(device: device, from: exr, size: size)
+    return texture
 }
