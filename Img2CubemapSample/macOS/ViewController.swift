@@ -26,15 +26,12 @@ class ViewController: NSViewController {
 
         let url = Bundle.main.url(forResource: "sample", withExtension: "exr")!
         self.exrUrl = url
-        Task { @MainActor [weak self] in
-            guard let self else { return }
-            do {
-                let texture = try await generateCubeTexture(device: device, exr: url)
-                setupUI(initialTexture: texture)
-                cubemapView.cubemap = texture
-            } catch {
-                print("Failed to generate cube texture: \(error)")
-            }
+        do {
+            let texture = try generateCubeTexture(device: device, exr: url)
+            setupUI(initialTexture: texture)
+            cubemapView.cubemap = texture
+        } catch {
+            print("Failed to generate cube texture: \(error)")
         }
     }
 
@@ -107,15 +104,12 @@ class ViewController: NSViewController {
             guard let self = self else { return }
             if result == .OK, let url = dialog.url {
                 self.exrUrl = url
-
-                Task { @MainActor [weak self] in
-                    guard let self else { return }
-                    do {
-                        let texture = try await generateCubeTexture(device: device, exr: url)
-                        cubemapView.cubemap = texture
-                    } catch {
-                        print("Failed to generate cube texture: \(error)")
-                    }
+                
+                do {
+                    let texture = try generateCubeTexture(device: device, exr: url)
+                    cubemapView.cubemap = texture
+                } catch {
+                    print("Failed to generate cube texture: \(error)")
                 }
             }
         }

@@ -22,15 +22,12 @@ class ViewController: UIViewController {
         self.commandQueue = commandQueue
 
         let url = Bundle.main.url(forResource: "sample", withExtension: "exr")!
-        Task { @MainActor [weak self] in
-            guard let self else { return }
-            do {
-                let texture = try await generateCubeTexture(device: device, exr: url)
-                setupUI(initialTexture: texture)
-                cubemapView.cubemap = texture
-            } catch {
-                print("Failed to generate cube texture: \(error)")
-            }
+        do {
+            let texture = try generateCubeTexture(device: device, exr: url)
+            setupUI(initialTexture: texture)
+            cubemapView.cubemap = texture
+        } catch {
+            print("Failed to generate cube texture: \(error)")
         }
     }
 

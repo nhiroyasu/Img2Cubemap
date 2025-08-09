@@ -31,7 +31,7 @@ func generateMetalTexture(
     return texture
 }
 
-func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) async throws -> MTLTexture {
+func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) throws -> MTLTexture {
     guard let library = try? device.makePackageLibrary(),
           let commandQueue = device.makeCommandQueue(),
           let commandBuffer = commandQueue.makeCommandBuffer() else {
@@ -68,7 +68,7 @@ func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) async 
         throw Img2CubemapError.failedToCreateComputeFunction
     }
     let computeCommandEncoder = commandBuffer.makeComputeCommandEncoder()
-    let computePipelineState = try await device.makeComputePipelineState(function: generateCubeMapFunction)
+    let computePipelineState = try device.makeComputePipelineState(function: generateCubeMapFunction)
 
     // Set the compute pipeline state
     for face in 0..<6 {
@@ -98,22 +98,15 @@ func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) async 
     let mipmapCommandEncoder = commandBuffer.makeBlitCommandEncoder()!
     mipmapCommandEncoder.generateMipmaps(for: cubeTexture)
     mipmapCommandEncoder.endEncoding()
-
-    // Commit the command buffer and wait for completion
-    await withCheckedContinuation { continuation in
-        commandBuffer.addCompletedHandler { _ in
-            continuation.resume()
-        }
-        commandBuffer.commit()
-    }
+    commandBuffer.commit()
 
     return cubeTexture
 }
 
-public func generateCubeTexture(device: any MTLDevice, exr url: URL) async throws -> MTLTexture {
+public func generateCubeTexture(device: any MTLDevice, exr url: URL) throws -> MTLTexture {
     let exr = try readEXR(url: url)
 
     let size = Int(exr.header.width) / 4 // Equirectangular to cube map conversion typically uses 1/4 of the width for each face
-    let texture = try await generateCubeTexture(device: device, from: exr, size: size)
+    let texture = try generateCubeTexture(device: device, from: exr, size: size)
     return texture
 }
