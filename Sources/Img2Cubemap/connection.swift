@@ -100,6 +100,7 @@ func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) throws
     mipmapCommandEncoder.generateMipmaps(for: cubeTexture)
     mipmapCommandEncoder.endEncoding()
     commandBuffer.commit()
+    commandBuffer.waitUntilCompleted()
 
     return cubeTexture
 }
