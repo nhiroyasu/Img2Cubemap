@@ -58,6 +58,7 @@ func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) throws
         size: size,
         mipmapped: true
     )
+    cubeDescriptor.storageMode = .shared
     cubeDescriptor.usage = [.shaderRead, .shaderWrite]
     guard let cubeTexture = device.makeTexture(descriptor: cubeDescriptor) else {
         throw Img2CubemapError.failedToCreateCubeTexture
