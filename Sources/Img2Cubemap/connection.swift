@@ -102,8 +102,8 @@ func generateCubeTexture(
 
     // Generate mipmaps for the cube texture
     let mipmapCommandEncoder = commandBuffer.makeBlitCommandEncoder()!
-    mipmapCommandEncoder.updateFence(fence)
     mipmapCommandEncoder.generateMipmaps(for: cubeTexture)
+    mipmapCommandEncoder.updateFence(fence)
     mipmapCommandEncoder.endEncoding()
 
     return (cubeTexture, fence)
