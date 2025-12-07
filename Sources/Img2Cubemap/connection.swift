@@ -36,7 +36,7 @@ func generateCubeTexture(
     commandBuffer: MTLCommandBuffer,
     from exr: EXRData,
     size: Int
-) throws -> MTLTexture {
+) throws -> (MTLTexture, MTLFence) {
     guard let library = try? device.makePackageLibrary() else {
         throw Img2CubemapError.invalidMetalDevice
     }
@@ -98,12 +98,15 @@ func generateCubeTexture(
     }
     computeCommandEncoder?.endEncoding()
 
+    let fence = device.makeFence()!
+
     // Generate mipmaps for the cube texture
     let mipmapCommandEncoder = commandBuffer.makeBlitCommandEncoder()!
+    mipmapCommandEncoder.updateFence(fence)
     mipmapCommandEncoder.generateMipmaps(for: cubeTexture)
     mipmapCommandEncoder.endEncoding()
 
-    return cubeTexture
+    return (cubeTexture, fence)
 }
 
 public func generateCubeTexture(device: any MTLDevice, exr url: URL) throws -> MTLTexture {
@@ -113,24 +116,37 @@ public func generateCubeTexture(device: any MTLDevice, exr url: URL) throws -> M
     }
     let exr = try readEXR(url: url)
     let size = Int(exr.header.width) / 4 // Equirectangular to cube map conversion typically uses 1/4 of the width for each face
-    let texture = try generateCubeTexture(device: device, commandBuffer: commandBuffer, from: exr, size: size)
+    let (texture, _) = try generateCubeTexture(device: device, commandBuffer: commandBuffer, from: exr, size: size)
     commandBuffer.commit()
     commandBuffer.waitUntilCompleted()
+    return texture
+}
+
+public func generateCubeTexture(device: any MTLDevice, exr url: URL) async throws -> MTLTexture {
+    guard let commandQueue = device.makeCommandQueue(),
+          let commandBuffer = commandQueue.makeCommandBuffer() else {
+        throw Img2CubemapError.invalidMetalDevice
+    }
+    let exr = try readEXR(url: url)
+    let size = Int(exr.header.width) / 4 // Equirectangular to cube map conversion typically uses 1/4 of the width for each face
+    let (texture, _) = try generateCubeTexture(device: device, commandBuffer: commandBuffer, from: exr, size: size)
+    commandBuffer.commit()
+    await commandBuffer.completed()
     return texture
 }
 
 public func encodeGeneratingCubeTexture(
     commandBuffer: any MTLCommandBuffer,
     exr url: URL
-) throws -> MTLTexture {
+) throws -> (MTLTexture, MTLFence) {
     let exr = try readEXR(url: url)
 
     let size = Int(exr.header.width) / 4 // Equirectangular to cube map conversion typically uses 1/4 of the width for each face
-    let texture = try generateCubeTexture(
+    let (texture, fence) = try generateCubeTexture(
         device: commandBuffer.device,
         commandBuffer: commandBuffer,
         from: exr,
         size: size
     )
-    return texture
+    return (texture, fence)
 }
