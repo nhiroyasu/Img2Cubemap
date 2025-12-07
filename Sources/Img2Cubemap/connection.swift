@@ -122,7 +122,7 @@ public func generateCubeTexture(device: any MTLDevice, exr url: URL) throws -> M
 public func encodeGeneratingCubeTexture(
     commandBuffer: any MTLCommandBuffer,
     exr url: URL
-) async throws -> MTLTexture {
+) throws -> MTLTexture {
     let exr = try readEXR(url: url)
 
     let size = Int(exr.header.width) / 4 // Equirectangular to cube map conversion typically uses 1/4 of the width for each face
