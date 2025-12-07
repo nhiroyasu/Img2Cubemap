@@ -31,10 +31,13 @@ func generateMetalTexture(
     return texture
 }
 
-func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) throws -> MTLTexture {
-    guard let library = try? device.makePackageLibrary(),
-          let commandQueue = device.makeCommandQueue(),
-          let commandBuffer = commandQueue.makeCommandBuffer() else {
+func generateCubeTexture(
+    device: MTLDevice,
+    commandBuffer: MTLCommandBuffer,
+    from exr: EXRData,
+    size: Int
+) throws -> MTLTexture {
+    guard let library = try? device.makePackageLibrary() else {
         throw Img2CubemapError.invalidMetalDevice
     }
 
@@ -99,16 +102,35 @@ func generateCubeTexture(device: MTLDevice, from exr: EXRData, size: Int) throws
     let mipmapCommandEncoder = commandBuffer.makeBlitCommandEncoder()!
     mipmapCommandEncoder.generateMipmaps(for: cubeTexture)
     mipmapCommandEncoder.endEncoding()
-    commandBuffer.commit()
-    commandBuffer.waitUntilCompleted()
 
     return cubeTexture
 }
 
 public func generateCubeTexture(device: any MTLDevice, exr url: URL) throws -> MTLTexture {
+    guard let commandQueue = device.makeCommandQueue(),
+          let commandBuffer = commandQueue.makeCommandBuffer() else {
+        throw Img2CubemapError.invalidMetalDevice
+    }
+    let exr = try readEXR(url: url)
+    let size = Int(exr.header.width) / 4 // Equirectangular to cube map conversion typically uses 1/4 of the width for each face
+    let texture = try generateCubeTexture(device: device, commandBuffer: commandBuffer, from: exr, size: size)
+    commandBuffer.commit()
+    commandBuffer.waitUntilCompleted()
+    return texture
+}
+
+public func encodeGeneratingCubeTexture(
+    commandBuffer: any MTLCommandBuffer,
+    exr url: URL
+) async throws -> MTLTexture {
     let exr = try readEXR(url: url)
 
     let size = Int(exr.header.width) / 4 // Equirectangular to cube map conversion typically uses 1/4 of the width for each face
-    let texture = try generateCubeTexture(device: device, from: exr, size: size)
+    let texture = try generateCubeTexture(
+        device: commandBuffer.device,
+        commandBuffer: commandBuffer,
+        from: exr,
+        size: size
+    )
     return texture
 }
